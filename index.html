@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Brain Trader IA V2</title>
+
+<meta name="theme-color" content="#0d1117">
+
+<meta name="description" content="Brain Trader IA - Plataforma Inteligente de Análise Técnica">
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- ================================================= -->
+<!-- HEADER -->
+<!-- ================================================= -->
+
+<header class="topo">
+
+<div class="logo">
+
+<div class="logo-icon">
+
+📈
+
+</div>
+
+<div>
+
+<h1>Brain Trader IA</h1>
+
+<p>Plataforma Inteligente de Trading</p>
+
+</div>
+
+</div>
+
+<div class="topo-direita">
+
+<div class="status-api">
+
+<span class="led verde"></span>
+
+API Online
+
+</div>
+
+<div class="relogio">
+
+<span id="hora">
+
+00:00:00
+
+</span>
+
+</div>
+
+<div class="perfil">
+
+👤
+
+</div>
+
+</div>
+
+</header>
+
+<!-- ================================================= -->
+<!-- BARRA MERCADO -->
+<!-- ================================================= -->
+
+<section class="mercado-top">
+
+<div class="pesquisa">
+
+<input
+
+type="text"
+
+id="buscarAtivo"
+
+placeholder="Pesquisar ativo... PETR4, VALE3, WIN, WDO..."
+
+>
+
+<button id="btnBuscar">
+
+Pesquisar
+
+</button>
+
+</div>
+
+<div class="ativo-atual">
+
+<h2 id="ativoNome">
+
+Mini Dólar (WDO)
+
+</h2>
+
+<div class="preco">
+
+<span id="precoAtual">
+
+--
+
+</span>
+
+</div>
+
+<div class="variacao">
+
+<span id="variacao">
+
+--%
+
+</span>
+
+</div>
+
+</div>
+
+<div class="brain-status">
+
+<div class="brain-titulo">
+
+🧠 Brain IA
+
+</div>
+
+<div id="brainMensagem">
+
+Aguardando análise...
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- MENU PRINCIPAL -->
+<!-- ================================================= -->
+
+<nav class="menu">
+
+<button class="menu-btn active">
+
+📈 Mercado
+
+</button>
+
+<button class="menu-btn">
+
+🧠 Brain
+
+</button>
+
+<button class="menu-btn">
+
+📊 Indicadores
+
+</button>
+
+<button class="menu-btn">
+
+🎓 Aprender
+
+</button>
+
+<button class="menu-btn">
+
+📜 Histórico
+
+</button>
+
+<button class="menu-btn">
+
+⚙ Configurações
+
+</button>
+
+</nav>
+
+<!-- ================================================= -->
+<!-- CONTEÚDO PRINCIPAL -->
+<!-- Continuação na Parte 2 -->
+<!-- ================================================= -->
+
+
+
+<main>
+
+<!-- PARTE 2 COMEÇA AQUI -->
+
+<section id="mercado">
+
+<div class="grafico-container">
+
+<div class="grafico-topo">
+
+<div class="ativo-info">
+
+<h2>📈 Mercado em Tempo Real</h2>
+
+<p id="mercadoStatus">
+Aguardando dados...
+</p>
+
+</div>
+
+<div class="timeframes">
+
+<button class="tf active">1m</button>
+
+<button class="tf">5m</button>
+
+<button class="tf">15m</button>
+
+<button class="tf">30m</button>
+
+<button class="tf">1h</button>
+
+<button class="tf">4h</button>
+
+<button class="tf">1D</button>
+
+</div>
+
+</div>
+
+<div class="grafico-principal">
+
+<canvas id="graficoPrincipal"></canvas>
+
+</div>
+
+<div class="grafico-indicadores">
+
+<div class="mini-card">
+
+<h3>RSI</h3>
+
+<span id="rsiValor">--</span>
+
+</div>
+
+<div class="mini-card">
+
+<h3>MACD</h3>
+
+<span id="macdValor">--</span>
+
+</div>
+
+<div class="mini-card">
+
+<h3>Volume</h3>
+
+<span id="volumeValor">--</span>
+
+</div>
+
+<div class="mini-card">
+
+<h3>ATR</h3>
+
+<span id="atrValor">--</span>
+
+</div>
+
+<div class="mini-card">
+
+<h3>ADX</h3>
+
+<span id="adxValor">--</span>
+
+</div>
+
+<div class="mini-card">
+
+<h3>VWAP</h3>
+
+<span id="vwapValor">--</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- A Parte 3 será colada abaixo desta -->
+
+
+
+<!-- ================================================= -->
+<!-- BRAIN IA -->
+<!-- ================================================= -->
+
+<section id="brain">
+
+<div class="brain-container">
+
+<div class="brain-header">
+
+<h2>🧠 Brain IA</h2>
+
+<p>Central Inteligente de Análise</p>
+
+</div>
+
+<div class="brain-grid">
+
+<div class="brain-card">
+
+<h3>📊 Estratégia Detectada</h3>
+
+<div id="estrategiaNome">
+
+Aguardando análise...
+
+</div>
+
+<div id="estrategiaDescricao">
+
+A IA analisará os candles em tempo real.
+
+</div>
+
+</div>
+
+<div class="brain-card">
+
+<h3>🎯 Probabilidade</h3>
+
+<div class="probabilidade">
+
+<span id="probabilidadeValor">
+
+0%
+
+</span>
+
+</div>
+
+<div class="barra">
+
+<div id="barraProbabilidade"></div>
+
+</div>
+
+</div>
+
+<div class="brain-card">
+
+<h3>📍 Entrada</h3>
+
+<div id="entradaValor">
+
+--
+
+</div>
+
+</div>
+
+<div class="brain-card">
+
+<h3>🛑 Stop Loss</h3>
+
+<div id="stopValor">
+
+--
+
+</div>
+
+</div>
+
+<div class="brain-card">
+
+<h3>🎯 Alvo 1</h3>
+
+<div id="alvo1">
+
+--
+
+</div>
+
+</div>
+
+<div class="brain-card">
+
+<h3>🎯 Alvo 2</h3>
+
+<div id="alvo2">
+
+--
+
+</div>
+
+</div>
+
+<div class="brain-card">
+
+<h3>⚠️ Gestão de Risco</h3>
+
+<div id="riscoTexto">
+
+Aguardando cálculo...
+
+</div>
+
+</div>
+
+<div class="brain-card">
+
+<h3>🤖 Professor IA</h3>
+
+<div id="explicacaoIA">
+
+A IA explicará automaticamente a estratégia encontrada.
+
+</div>
+
+<button id="btnAprender">
+
+📚 Aprender Estratégia
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- Continuação na Parte 4 -->
+<!-- ================================================= -->
+
+
+<!-- ================================================= -->
+<!-- PROFESSOR IA / REPLAY -->
+<!-- ================================================= -->
+
+<section id="professor">
+
+<div class="professor-container">
+
+<div class="professor-header">
+
+<h2>🎓 Professor IA</h2>
+
+<p>Aprenda com cada operação encontrada.</p>
+
+</div>
+
+<div class="professor-grid">
+
+<div class="professor-card">
+
+<h3>📖 Explicação</h3>
+
+<div id="textoProfessor">
+
+A IA explicará passo a passo a estratégia detectada.
+
+</div>
+
+</div>
+
+<div class="professor-card">
+
+<h3>🕯 Replay dos Candles</h3>
+
+<canvas id="replayCanvas"></canvas>
+
+<div class="replay-controles">
+
+<button id="btnReplay">
+
+▶ Iniciar Replay
+
+</button>
+
+<button id="btnPausar">
+
+⏸ Pausar
+
+</button>
+
+<button id="btnReiniciar">
+
+🔄 Reiniciar
+
+</button>
+
+</div>
+
+</div>
+
+<div class="professor-card">
+
+<h3>🧠 Por que a IA decidiu isso?</h3>
+
+<ul id="listaMotivos">
+
+<li>Tendência principal...</li>
+
+<li>RSI...</li>
+
+<li>MACD...</li>
+
+<li>Volume...</li>
+
+<li>Candles...</li>
+
+</ul>
+
+</div>
+
+<div class="professor-card">
+
+<h3>📚 Passo a Passo</h3>
+
+<ol id="passosAnalise">
+
+<li>Leitura da tendência</li>
+
+<li>Análise dos candles</li>
+
+<li>Verificação dos indicadores</li>
+
+<li>Confirmação da estratégia</li>
+
+<li>Cálculo do risco</li>
+
+<li>Sugestão final</li>
+
+</ol>
+
+</div>
+
+<div class="professor-card">
+
+<h3>❓ Quiz</h3>
+
+<p id="perguntaQuiz">
+
+A IA fará perguntas sobre a estratégia encontrada.
+
+</p>
+
+<button id="btnResponder">
+
+Responder
+
+</button>
+
+</div>
+
+<div class="professor-card">
+
+<h3>🏆 Evolução</h3>
+
+<div class="progresso">
+
+<div class="barra-progresso">
+
+<div id="nivelAluno"></div>
+
+</div>
+
+<p id="porcentagemAluno">
+
+0% concluído
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- Parte 5 começa abaixo -->
+<!-- ================================================= -->
+
+
+<!-- ================================================= -->
+<!-- INDICADORES TÉCNICOS -->
+<!-- ================================================= -->
+
+<section id="indicadores">
+
+<div class="indicadores-container">
+
+<div class="indicadores-header">
+
+<h2>📊 Indicadores Técnicos</h2>
+
+<p>Análise automática realizada pela Brain IA.</p>
+
+</div>
+
+<div class="indicadores-grid">
+
+<div class="indicador-card">
+<h3>RSI</h3>
+<div id="ind-rsi">--</div>
+<p id="rsi-status">Aguardando...</p>
+</div>
+
+<div class="indicador-card">
+<h3>MACD</h3>
+<div id="ind-macd">--</div>
+<p id="macd-status">Aguardando...</p>
+</div>
+
+<div class="indicador-card">
+<h3>Médias Móveis</h3>
+<div id="ind-ma">--</div>
+<p id="ma-status">Aguardando...</p>
+</div>
+
+<div class="indicador-card">
+<h3>Bollinger</h3>
+<div id="ind-bb">--</div>
+<p id="bb-status">Aguardando...</p>
+</div>
+
+<div class="indicador-card">
+<h3>ADX</h3>
+<div id="ind-adx">--</div>
+<p id="adx-status">Aguardando...</p>
+</div>
+
+<div class="indicador-card">
+<h3>ATR</h3>
+<div id="ind-atr">--</div>
+<p id="atr-status">Aguardando...</p>
+</div>
+
+<div class="indicador-card">
+<h3>VWAP</h3>
+<div id="ind-vwap">--</div>
+<p id="vwap-status">Aguardando...</p>
+</div>
+
+<div class="indicador-card">
+<h3>Volume</h3>
+<div id="ind-volume">--</div>
+<p id="volume-status">Aguardando...</p>
+</div>
+
+<div class="indicador-card">
+<h3>OBV</h3>
+<div id="ind-obv">--</div>
+<p id="obv-status">Aguardando...</p>
+</div>
+
+<div class="indicador-card">
+<h3>CCI</h3>
+<div id="ind-cci">--</div>
+<p id="cci-status">Aguardando...</p>
+</div>
+
+<div class="indicador-card">
+<h3>MFI</h3>
+<div id="ind-mfi">--</div>
+<p id="mfi-status">Aguardando...</p>
+</div>
+
+<div class="indicador-card">
+<h3>Ichimoku</h3>
+<div id="ind-ichi">--</div>
+<p id="ichi-status">Aguardando...</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- GESTÃO DE RISCO -->
+<!-- ================================================= -->
+
+<section id="gestao-risco">
+
+<div class="risco-container">
+
+<h2>⚠ Gestão Inteligente de Risco</h2>
+
+<div class="risco-grid">
+
+<div class="risco-card">
+<h3>Capital</h3>
+<div id="capital">--</div>
+</div>
+
+<div class="risco-card">
+<h3>Risco por Operação</h3>
+<div id="risco-operacao">--</div>
+</div>
+
+<div class="risco-card">
+<h3>Risco x Retorno</h3>
+<div id="rr">--</div>
+</div>
+
+<div class="risco-card">
+<h3>Volatilidade</h3>
+<div id="volatilidade">--</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- PARTE 6 ABAIXO -->
+<!-- ================================================= -->
+
+<!-- ================================================= -->
+<!-- NOTÍCIAS DO MERCADO -->
+<!-- ================================================= -->
+
+<section id="noticias">
+
+<div class="noticias-container">
+
+<h2>📰 Notícias do Mercado</h2>
+
+<div class="noticias-grid">
+
+<div class="noticia-card">
+
+<h3>Últimas Notícias</h3>
+
+<div id="listaNoticias">
+
+Carregando notícias...
+
+</div>
+
+</div>
+
+<div class="noticia-card">
+
+<h3>Calendário Econômico</h3>
+
+<div id="calendarioEconomico">
+
+Aguardando eventos...
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- HISTÓRICO -->
+<!-- ================================================= -->
+
+<section id="historico">
+
+<div class="historico-container">
+
+<h2>📋 Histórico de Análises</h2>
+
+<table class="tabelaHistorico">
+
+<thead>
+
+<tr>
+
+<th>Data</th>
+
+<th>Ativo</th>
+
+<th>Estratégia</th>
+
+<th>Sinal</th>
+
+<th>Resultado</th>
+
+</tr>
+
+</thead>
+
+<tbody id="historicoTabela">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- FAVORITOS -->
+<!-- ================================================= -->
+
+<section id="favoritos">
+
+<div class="favoritos-container">
+
+<h2>⭐ Ativos Favoritos</h2>
+
+<div id="ativosFavoritos">
+
+Nenhum ativo salvo.
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- CONFIGURAÇÕES -->
+<!-- ================================================= -->
+
+<section id="configuracoes">
+
+<div class="config-container">
+
+<h2>⚙️ Configurações</h2>
+
+<button>🌙 Tema Escuro</button>
+
+<button>🔔 Alertas</button>
+
+<button>📱 Notificações</button>
+
+<button>🌎 Idioma</button>
+
+<button>💾 Backup</button>
+
+</div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- MENU INFERIOR -->
+<!-- ================================================= -->
+
+<nav class="bottom-menu">
+
+<button>
+
+📈
+
+<span>Mercado</span>
+
+</button>
+
+<button>
+
+🧠
+
+<span>Brain</span>
+
+</button>
+
+<button>
+
+📊
+
+<span>Indicadores</span>
+
+</button>
+
+<button>
+
+🎓
+
+<span>Aprender</span>
+
+</button>
+
+<button>
+
+⚙️
+
+<span>Config</span>
+
+</button>
+
+</nav>
+
+<!-- ================================================= -->
+<!-- RODAPÉ -->
+<!-- ================================================= -->
+
+<footer>
+
+<div>
+
+Brain Trader IA V2 © 2026
+
+</div>
+
+<div>
+
+Desenvolvido por Davi Walker
+
+</div>
+
+</footer>
+
+
+<!-- ================================================= -->
+<!-- MODAL PROFESSOR IA -->
+<!-- ================================================= -->
+
+<div id="modalProfessor" class="modal">
+
+<div class="modal-content">
+
+<span class="fechar">&times;</span>
+
+<h2>🎓 Professor IA</h2>
+
+<div id="conteudoProfessor">
+
+A IA explicará aqui cada estratégia encontrada.
+
+</div>
+
+<button id="btnProximaAula">
+
+Próxima Aula
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- MODAL REPLAY -->
+<!-- ================================================= -->
+
+<div id="modalReplay" class="modal">
+
+<div class="modal-content">
+
+<span class="fecharReplay">&times;</span>
+
+<h2>🎥 Replay da Estratégia</h2>
+
+<canvas id="canvasReplay"></canvas>
+
+<div class="replay-buttons">
+
+<button id="btnPlay">
+
+▶ Play
+
+</button>
+
+<button id="btnPause">
+
+⏸ Pause
+
+</button>
+
+<button id="btnReset">
+
+🔄 Reiniciar
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- MODAL ALERTAS -->
+<!-- ================================================= -->
+
+<div id="modalAlerta" class="modal">
+
+<div class="modal-content">
+
+<h2>🔔 Alertas</h2>
+
+<div id="listaAlertas">
+
+Nenhum alerta.
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+<!-- ================================================= -->
+<!-- JAVASCRIPTS -->
+<!-- ================================================= -->
+
+<script src="api.js"></script>
+
+<script src="indicadores.js"></script>
+
+<script src="estrategias.js"></script>
+
+<script src="brain.js"></script>
+
+<script src="professor.js"></script>
+
+<script src="replay.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
+
+
