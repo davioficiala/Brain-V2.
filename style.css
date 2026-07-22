@@ -929,8 +929,432 @@ border:1px solid rgba(255,255,255,.08);
 /* FIM PARTE 3                                           */
 /* ===================================================== */
 
+/* =====================================
+   BRAIN WALKER IA - STYLE CSS
+   PARTE 4
+===================================== */
 
 
+/* PAINEL DE INDICADORES */
+
+.indicadores{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-top:20px;
+}
 
 
+.indicador-card{
+    background:#111827;
+    border:1px solid #1f2937;
+    padding:18px;
+    border-radius:15px;
+}
+
+
+.indicador-card h3{
+    color:#00ff88;
+    font-size:16px;
+    margin-bottom:10px;
+}
+
+
+.indicador-card span{
+    font-size:22px;
+    font-weight:bold;
+}
+
+
+/* ÁREA DO GRÁFICO */
+
+.grafico-box{
+    background:#0f172a;
+    border-radius:18px;
+    padding:20px;
+    margin-top:20px;
+    border:1px solid #1e293b;
+    min-height:420px;
+}
+
+
+.grafico-box canvas{
+    width:100%;
+    height:100%;
+}
+
+
+/* SINAL DA IA */
+
+.sinal-box{
+    margin-top:20px;
+    padding:25px;
+    border-radius:18px;
+    background:#111827;
+    border:1px solid #334155;
+    text-align:center;
+}
+
+
+.sinal-box h2{
+    font-size:26px;
+    margin-bottom:10px;
+}
+
+
+.sinal-compra{
+    color:#00ff88;
+}
+
+
+.sinal-venda{
+    color:#ff1744;
+}
+
+
+.sinal-espera{
+    color:#facc15;
+}
+
+
+/* RESPONSIVO CELULAR */
+
+@media(max-width:768px){
+
+    header{
+        flex-direction:column;
+        gap:15px;
+        text-align:center;
+    }
+
+
+    header h1{
+        font-size:22px;
+    }
+
+
+    .grafico-box{
+        min-height:300px;
+    }
+
+}
+
+
+/* =====================================
+   FIM DA PARTE 4
+   CONTINUA NA PARTE 5
+===================================== */
+
+/* =====================================
+   BRAIN WALKER IA - STYLE CSS
+   PARTE 5
+===================================== */
+
+
+/* ÁREA DE ORDEM */
+
+.ordem-box{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    margin-top:20px;
+}
+
+
+.ordem-card{
+    background:#111827;
+    padding:20px;
+    border-radius:15px;
+    border:1px solid #1f2937;
+}
+
+
+.ordem-card h3{
+    color:#94a3b8;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+
+.ordem-card strong{
+    font-size:24px;
+    color:#ffffff;
+}
+
+
+/* ÁREA DE COMPRA E VENDA */
+
+.operacao{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:25px;
+    flex-wrap:wrap;
+}
+
+
+.operacao button{
+    min-width:150px;
+    font-size:16px;
+}
+
+
+.compra{
+    background:#00c853;
+    color:white;
+}
+
+
+.venda{
+    background:#ff1744;
+    color:white;
+}
+
+
+.cancelar{
+    background:#475569;
+    color:white;
+}
+
+
+/* RISCO */
+
+.risco-box{
+    margin-top:20px;
+    background:#0f172a;
+    padding:20px;
+    border-radius:15px;
+    border:1px solid #334155;
+}
+
+
+.risco-item{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #1e293b;
+}
+
+
+.risco-item:last-child{
+    border-bottom:none;
+}
+
+
+.risco-alto{
+    color:#ff1744;
+}
+
+
+.risco-medio{
+    color:#facc15;
+}
+
+
+.risco-baixo{
+    color:#00ff88;
+}
+
+
+/* =====================================
+   FIM DA PARTE 5
+   CONTINUA NA PARTE 6
+===================================== */
+
+/* =====================================
+   BRAIN WALKER IA - STYLE CSS
+   PARTE 6
+===================================== */
+
+
+/* MENU DE NAVEGAÇÃO */
+
+.menu{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+
+.menu button{
+    background:#1e293b;
+    color:#ffffff;
+    border:1px solid #334155;
+}
+
+
+.menu button.active{
+    background:#00ff88;
+    color:#081018;
+}
+
+
+/* ABAS */
+
+.aba{
+    display:none;
+    margin-top:20px;
+}
+
+
+.aba.ativa{
+    display:block;
+}
+
+
+/* TABELA DE DADOS */
+
+.tabela{
+    width:100%;
+    margin-top:20px;
+    border-collapse:collapse;
+    background:#111827;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+
+.tabela th{
+    background:#1e293b;
+    color:#00ff88;
+    padding:15px;
+    text-align:left;
+}
+
+
+.tabela td{
+    padding:15px;
+    border-bottom:1px solid #334155;
+    color:#e5e7eb;
+}
+
+
+.tabela tr:hover{
+    background:#172033;
+}
+
+
+/* NOTIFICAÇÕES */
+
+.alerta{
+    margin-top:20px;
+    padding:15px;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+
+.alerta-sucesso{
+    background:#064e3b;
+    color:#00ff88;
+}
+
+
+.alerta-erro{
+    background:#450a0a;
+    color:#ff6b6b;
+}
+
+
+.alerta-info{
+    background:#1e3a8a;
+    color:#93c5fd;
+}
+
+
+/* =====================================
+   FIM DA PARTE 6
+   CONTINUA NA PARTE 7
+===================================== */
+
+/* =====================================
+   BRAIN WALKER IA - STYLE CSS
+   PARTE 7 - FINAL
+===================================== */
+
+
+/* RODAPÉ */
+
+footer{
+    margin-top:30px;
+    padding:20px;
+    text-align:center;
+    background:#111827;
+    border-radius:15px;
+    border:1px solid #1f2937;
+    color:#94a3b8;
+}
+
+
+/* ANIMAÇÕES */
+
+.fade{
+    animation:fadeIn 0.5s ease;
+}
+
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+
+/* STATUS DA IA */
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+
+.status-dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#00ff88;
+    box-shadow:0 0 10px #00ff88;
+}
+
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+    .container{
+        padding:10px;
+    }
+
+
+    .operacao button{
+        width:100%;
+    }
+
+
+    .ordem-card strong{
+        font-size:20px;
+    }
+
+
+    .menu button{
+        width:100%;
+    }
+
+}
+
+
+/* =====================================
+   BRAIN WALKER IA
+   STYLE.CSS FINALIZADO
+===================================== */
 
