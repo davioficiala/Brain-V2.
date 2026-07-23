@@ -23,7 +23,7 @@ async function buscarCandles(){
 
     const dados = await resposta.json();
 
-alert(JSON.stringify(dados));
+alert(JSON.stringify(dados, null, 2));
 
 
         console.log("Candles recebidos:", dados);
