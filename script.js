@@ -1,39 +1,83 @@
 
 // =================================================
-// BRAIN WALKER IA
+// BRAIN WALKER IA V2
 // SCRIPT PRINCIPAL
+// PARTE 1
 // =================================================
 
 
-console.log("script.js carregado");
+// =================================================
+// INÍCIO - CONFIGURAÇÕES GERAIS
+// =================================================
+
+"use strict";
+
+const BrainTrader = {};
+
+BrainTrader.nome = "Brain Walker IA";
+
+BrainTrader.versao = "2.0";
+
+BrainTrader.ativo = "PETR4";
+
+BrainTrader.timeframe = "1min";
+
+BrainTrader.candles = [];
+
+BrainTrader.indicadores = {};
+
+BrainTrader.estrategia = {};
+
+BrainTrader.online = false;
+
+// =================================================
+// FIM - CONFIGURAÇÕES GERAIS
+// =================================================
+
 
 
 // =================================================
-// PEGAR CANVAS DO GRÁFICO
+// INÍCIO - PEGAR ELEMENTOS HTML
 // =================================================
 
 const canvas = document.getElementById("graficoPrincipal");
 
-const ctx = canvas ? canvas.getContext("2d") : null;
+const ctx = canvas.getContext("2d");
 
+const precoAtual = document.getElementById("precoAtual");
 
-if(ctx){
+const ativoNome = document.getElementById("ativoNome");
 
-    console.log("Canvas gráfico conectado");
+const mercadoStatus = document.getElementById("mercadoStatus");
 
-}
+const brainMensagem = document.getElementById("brainMensagem");
+
+const rsiValor = document.getElementById("rsiValor");
+
+const macdValor = document.getElementById("macdValor");
+
+const volumeValor = document.getElementById("volumeValor");
+
+const atrValor = document.getElementById("atrValor");
+
+const adxValor = document.getElementById("adxValor");
+
+const vwapValor = document.getElementById("vwapValor");
+
+// =================================================
+// FIM - PEGAR ELEMENTOS HTML
+// =================================================
 
 
 
 // =================================================
-// AJUSTAR TAMANHO DO CANVAS
+// INÍCIO - TAMANHO DO CANVAS
 // =================================================
 
-function ajustarCanvas() {
-
-    if (!canvas) return;
+function ajustarCanvas(){
 
     canvas.width = canvas.offsetWidth;
+
     canvas.height = canvas.offsetHeight;
 
 }
@@ -42,131 +86,122 @@ window.addEventListener("resize", ajustarCanvas);
 
 ajustarCanvas();
 
+// =================================================
+// FIM - TAMANHO DO CANVAS
+// =================================================
+
+
 
 // =================================================
-// DESENHAR FUNDO DO GRÁFICO
+// INÍCIO - LIMPAR CANVAS
 // =================================================
 
-function desenharFundo() {
+function limparGrafico(){
 
-    if (!ctx) return;
+    ctx.clearRect(
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+        0,
 
-    ctx.fillStyle = "#0d1117";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+        0,
 
-    ctx.strokeStyle = "#222";
+        canvas.width,
 
-    for (let y = 0; y < canvas.height; y += 40) {
+        canvas.height
+
+    );
+
+}
+
+// =================================================
+// FIM - LIMPAR CANVAS
+// =================================================
+
+
+
+// =================================================
+// INÍCIO - DESENHAR FUNDO
+// =================================================
+
+function desenharFundo(){
+
+    limparGrafico();
+
+    ctx.fillStyle="#0d1117";
+
+    ctx.fillRect(
+
+        0,
+
+        0,
+
+        canvas.width,
+
+        canvas.height
+
+    );
+
+}
+
+// =================================================
+// FIM - DESENHAR FUNDO
+// =================================================
+
+
+
+// =================================================
+// INÍCIO - DESENHAR GRADE
+// =================================================
+
+function desenharGrade(){
+
+    ctx.strokeStyle="#20242d";
+
+    ctx.lineWidth=1;
+
+
+    for(let y=0;y<canvas.height;y+=40){
 
         ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
+
+        ctx.moveTo(0,y);
+
+        ctx.lineTo(canvas.width,y);
+
         ctx.stroke();
 
     }
 
-    for (let x = 0; x < canvas.width; x += 60) {
+
+    for(let x=0;x<canvas.width;x+=60){
 
         ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);
+
+        ctx.moveTo(x,0);
+
+        ctx.lineTo(x,canvas.height);
+
         ctx.stroke();
 
     }
 
 }
 
+// =================================================
+// FIM - DESENHAR GRADE
+// =================================================
+
+
 
 // =================================================
-// INICIAR GRÁFICO
+// INÍCIO - INICIALIZAR
 // =================================================
 
 desenharFundo();
 
+desenharGrade();
+
+console.log("Brain Walker IA iniciado");
 
 // =================================================
-// INÍCIO - DESENHAR CANDLES REAIS
-// =================================================
-
-function desenharCandles() {
-
-    if (!ctx) return;
-
-    if (!window.candlesReais) return;
-
-    desenharFundo();
-
-    const candles = window.candlesReais.slice().reverse();
-
-    const largura = canvas.width;
-
-    const altura = canvas.height;
-
-    const larguraCandle = largura / candles.length;
-
-
-    const maior = Math.max(...candles.map(c => Number(c.high)));
-
-    const menor = Math.min(...candles.map(c => Number(c.low)));
-
-    const escala = altura / (maior - menor);
-
-
-    candles.forEach((candle, indice) => {
-
-        const open = Number(candle.open);
-
-        const high = Number(candle.high);
-
-        const low = Number(candle.low);
-
-        const close = Number(candle.close);
-
-
-        const x = indice * larguraCandle + larguraCandle / 2;
-
-
-        const yOpen = altura - ((open - menor) * escala);
-
-        const yClose = altura - ((close - menor) * escala);
-
-        const yHigh = altura - ((high - menor) * escala);
-
-        const yLow = altura - ((low - menor) * escala);
-
-
-        ctx.strokeStyle = "#ffffff";
-
-        ctx.beginPath();
-
-        ctx.moveTo(x, yHigh);
-
-        ctx.lineTo(x, yLow);
-
-        ctx.stroke();
-
-
-        ctx.fillStyle = close >= open ? "#00ff66" : "#ff3333";
-
-
-        ctx.fillRect(
-
-            x - 4,
-
-            Math.min(yOpen, yClose),
-
-            8,
-
-            Math.abs(yClose - yOpen) || 1
-
-        );
-
-    });
-
-}
-
-// =================================================
-// FIM - DESENHAR CANDLES REAIS
+// FIM - INICIALIZAR
 // =================================================
