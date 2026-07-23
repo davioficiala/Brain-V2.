@@ -546,5 +546,217 @@ function desenharCandles(){
 // =================================================
 
 
+// =================================================
+// PARTE 3
+// =================================================
+
+
+// =================================================
+// ATUALIZAR PREÇO NA TELA
+// =================================================
+
+function atualizarPreco(){
+
+    if(
+
+        BrainTrader.candles.length===0
+
+    ){
+
+        return;
+
+    }
+
+    const ultimo=
+
+    BrainTrader.candles[0];
+
+
+    if(precoAtual){
+
+        precoAtual.innerHTML=
+
+        "R$ "+
+
+        Number(
+
+            ultimo.close
+
+        ).toFixed(2);
+
+    }
+
+
+    if(ativoNome){
+
+        ativoNome.innerHTML=
+
+        BrainTrader.ativo;
+
+    }
+
+}
+
+
+// =================================================
+// ATUALIZAR STATUS DO MERCADO
+// =================================================
+
+function atualizarStatusMercado(){
+
+    if(!mercadoStatus){
+
+        return;
+
+    }
+
+
+    if(
+
+        BrainTrader.online
+
+    ){
+
+        mercadoStatus.innerHTML=
+
+        "🟢 ONLINE";
+
+    }
+
+    else{
+
+        mercadoStatus.innerHTML=
+
+        "🔴 OFFLINE";
+
+    }
+
+}
+
+
+// =================================================
+// ATUALIZAR MENSAGEM DA IA
+// =================================================
+
+function atualizarBrain(){
+
+    if(
+
+        !brainMensagem
+
+    ){
+
+        return;
+
+    }
+
+
+    if(
+
+        BrainTrader.candles.length<2
+
+    ){
+
+        brainMensagem.innerHTML=
+
+        "Aguardando mercado...";
+
+        return;
+
+    }
+
+
+    const atual=
+
+    Number(
+
+        BrainTrader.candles[0].close
+
+    );
+
+
+    const anterior=
+
+    Number(
+
+        BrainTrader.candles[1].close
+
+    );
+
+
+    if(
+
+        atual>anterior
+
+    ){
+
+        brainMensagem.innerHTML=
+
+        "📈 Tendência de Alta";
+
+    }
+
+    else if(
+
+        atual<anterior
+
+    ){
+
+        brainMensagem.innerHTML=
+
+        "📉 Tendência de Baixa";
+
+    }
+
+    else{
+
+        brainMensagem.innerHTML=
+
+        "➡ Mercado Lateral";
+
+    }
+
+}
+
+
+// =================================================
+// LOOP PRINCIPAL
+// =================================================
+
+function atualizarSistema(){
+
+    atualizarCandles();
+
+    atualizarPreco();
+
+    atualizarStatusMercado();
+
+    atualizarBrain();
+
+    desenharCandles();
+
+}
+
+
+// =================================================
+// EXECUÇÃO AUTOMÁTICA
+// =================================================
+
+setInterval(
+
+    atualizarSistema,
+
+    1000
+
+);
+
+atualizarSistema();
+
+
+// =================================================
+// FIM PARTE 3
+// =================================================
+
+
 
 
