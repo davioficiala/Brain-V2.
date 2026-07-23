@@ -10,7 +10,7 @@
 // =================================================
 
 // COLOQUE SUA CHAVE DA API AQUI
-const API_KEY = "COLE_SUA_API_KEY_AQUI";
+const API_KEY = "f2c71f3ac827461787c0cf240d6b9314";
 
 
 // =================================================
