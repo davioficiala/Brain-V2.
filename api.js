@@ -1,6 +1,5 @@
 alert("API.JS CARREGOU");
-console.log("API.JS CARREGOU!");
-alert("API.JS conectado!");
+
 
 
 // =================================================
