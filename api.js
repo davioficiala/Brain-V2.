@@ -1,17 +1,20 @@
 
-
 // =================================================
 // BRAIN WALKER IA
 // API MERCADO REAL - PETR4
 // =================================================
 
-const API_KEY = "f2c71f3ac827461787c0cf240d6b9314";
+const API_KEY = "SUA_CHAVE_AQUI";
 
 const ATIVO = "PETR4";
 const INTERVALO = "1min";
 
 const API_URL = "https://api.twelvedata.com/time_series";
 
+
+// =================================================
+// BUSCAR CANDLES
+// =================================================
 
 async function buscarCandles(){
 
@@ -21,9 +24,7 @@ async function buscarCandles(){
 
         const resposta = await fetch(url);
 
-    const dados = await resposta.json();
-
-alert(JSON.stringify(dados, null, 2));
+        const dados = await resposta.json();
 
 
         console.log("Candles recebidos:", dados);
@@ -34,7 +35,10 @@ alert(JSON.stringify(dados, null, 2));
             const ultimo = dados.values[0];
 
 
-            // Atualiza preço no HTML
+            // =================================================
+            // ATUALIZAR PREÇO NO HTML
+            // =================================================
+
             const preco = document.getElementById("precoAtual");
 
             if(preco){
@@ -52,7 +56,6 @@ alert(JSON.stringify(dados, null, 2));
 
             }
 
-
         }
 
 
@@ -65,12 +68,20 @@ alert(JSON.stringify(dados, null, 2));
 }
 
 
-// chama a API
+// =================================================
+// INICIAR API
+// =================================================
+
 buscarCandles();
 
 
-// atualiza a cada 1 minuto
+// Atualização a cada 1 minuto
 setInterval(buscarCandles,60000);
+
+
+
+
+
 
 // =================================================
 // VARIÁVEIS DE DADOS
