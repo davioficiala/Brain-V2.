@@ -21,7 +21,9 @@ async function buscarCandles(){
 
         const resposta = await fetch(url);
 
-        const dados = await resposta.json();
+    const dados = await resposta.json();
+
+alert(JSON.stringify(dados));
 
 
         console.log("Candles recebidos:", dados);
