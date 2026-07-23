@@ -3,7 +3,7 @@
 // TESTE TWELVE DATA
 // =================================================
 
-const API_KEY = "SUA_CHAVE_AQUI";
+const API_KEY = "f2c71f3ac827461787c0cf240d6b9314";
 
 const url = `https://api.twelvedata.com/time_series?symbol=PETR4&interval=1min&apikey=${API_KEY}`;
 
