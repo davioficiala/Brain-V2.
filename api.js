@@ -1,3 +1,8 @@
+
+console.log("API.JS CARREGOU!");
+alert("API.JS conectado!");
+
+
 // =================================================
 // BRAIN WALKER IA
 // API DE MERCADO REAL
