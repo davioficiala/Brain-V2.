@@ -1070,6 +1070,302 @@ atualizarSistema=function(){
 // FIM PARTE 4
 // =================================================
 
+// =================================================
+// PARTE 5
+// =================================================
+
+
+// =================================================
+// CALCULAR MÉDIA MÓVEL
+// =================================================
+
+function calcularMediaMovel(periodo){
+
+    if(
+
+        BrainTrader.candles.length<periodo
+
+    ){
+
+        return [];
+
+    }
+
+    const medias=[];
+
+    for(
+
+        let i=0;
+
+        i<=BrainTrader.candles.length-periodo;
+
+        i++
+
+    ){
+
+        let soma=0;
+
+        for(
+
+            let j=0;
+
+            j<periodo;
+
+            j++
+
+        ){
+
+            soma+=Number(
+
+                BrainTrader.candles[i+j].close
+
+            );
+
+        }
+
+        medias.push(
+
+            soma/periodo
+
+        );
+
+    }
+
+    return medias;
+
+}
+
+
+// =================================================
+// DESENHAR MÉDIA MÓVEL
+// =================================================
+
+function desenharMediaMovel(
+
+    periodo,
+
+    cor
+
+){
+
+    const media=
+
+    calcularMediaMovel(
+
+        periodo
+
+    );
+
+    if(
+
+        media.length===0
+
+    ){
+
+        return;
+
+    }
+
+    const escala=
+
+    calcularEscala();
+
+    const largura=
+
+    canvas.width/
+
+    BrainTrader.candles.length;
+
+    ctx.beginPath();
+
+    ctx.strokeStyle=cor;
+
+    ctx.lineWidth=2;
+
+    media.reverse().forEach(
+
+        (
+
+            valor,
+
+            indice
+
+        )=>{
+
+            const x=
+
+            indice*
+
+            largura+
+
+            largura/2;
+
+            const y=
+
+            precoParaY(
+
+                valor,
+
+                escala
+
+            );
+
+            if(indice===0){
+
+                ctx.moveTo(
+
+                    x,
+
+                    y
+
+                );
+
+            }else{
+
+                ctx.lineTo(
+
+                    x,
+
+                    y
+
+                );
+
+            }
+
+        }
+
+    );
+
+    ctx.stroke();
+
+}
+
+
+// =================================================
+// CALCULAR MACD
+// =================================================
+
+function calcularMACD(){
+
+    if(
+
+        BrainTrader.candles.length<26
+
+    ){
+
+        return 0;
+
+    }
+
+    const ma12=
+
+    calcularMediaMovel(
+
+        12
+
+    )[0];
+
+    const ma26=
+
+    calcularMediaMovel(
+
+        26
+
+    )[0];
+
+    return(
+
+        ma12-
+
+        ma26
+
+    );
+
+}
+
+
+// =================================================
+// ATUALIZAR MACD
+// =================================================
+
+function atualizarMACD(){
+
+    const macd=
+
+    calcularMACD();
+
+    if(
+
+        macdValor
+
+    ){
+
+        macdValor.innerHTML=
+
+        macd.toFixed(
+
+            4
+
+        );
+
+    }
+
+}
+
+
+// =================================================
+// DESENHAR INDICADORES
+// =================================================
+
+function desenharIndicadores(){
+
+    desenharMediaMovel(
+
+        9,
+
+        "#FFD700"
+
+    );
+
+    desenharMediaMovel(
+
+        21,
+
+        "#00BFFF"
+
+    );
+
+    atualizarMACD();
+
+}
+
+
+// =================================================
+// LIGAR INDICADORES AO GRÁFICO
+// =================================================
+
+const desenharCandlesOriginal=
+
+desenharCandles;
+
+desenharCandles=function(){
+
+    desenharCandlesOriginal();
+
+    desenharIndicadores();
+
+};
+
+
+// =================================================
+// FIM PARTE 5
+// =================================================
+
+
+
+
+
+
 
 
 
