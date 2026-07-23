@@ -76,3 +76,141 @@ async function buscarMercadoReal(){
 // =================================================
 // FIM DA PARTE 1
 // =================================================
+
+// =================================================
+// BRAIN WALKER IA
+// TRATAMENTO DOS DADOS RECEBIDOS
+// PARTE 2
+// =================================================
+
+
+// =================================================
+// PROCESSAR RESPOSTA DA API
+// =================================================
+
+function processarDadosMercado(dados){
+
+
+    if(!dados){
+
+        console.log(
+            "Nenhum dado recebido"
+        );
+
+        return;
+
+    }
+
+
+
+    // =============================================
+    // PEGAR PREÇO ATUAL
+    // =============================================
+
+    if(dados.price){
+
+        precoMercado = Number(
+            dados.price
+        );
+
+    }
+
+
+
+    // =============================================
+    // PEGAR CANDLES
+    // =============================================
+
+    if(dados.values){
+
+
+        dadosCandles = dados.values;
+
+
+    }
+
+
+
+    console.log(
+        "Preço atual:",
+        precoMercado
+    );
+
+
+    console.log(
+        "Candles:",
+        dadosCandles
+    );
+
+
+    return {
+
+        preco: precoMercado,
+
+        candles: dadosCandles
+
+    };
+
+
+}
+
+
+
+
+// =================================================
+// ATUALIZAR PREÇO NO HTML
+// =================================================
+
+function atualizarPrecoTela(){
+
+
+    const elementoPreco =
+    document.getElementById(
+        "precoAtual"
+    );
+
+
+    if(elementoPreco){
+
+
+        elementoPreco.innerHTML =
+        precoMercado.toFixed(2);
+
+
+    }
+
+
+}
+
+
+
+// =================================================
+// ATUALIZAR ATIVO NA TELA
+// =================================================
+
+function atualizarNomeAtivo(){
+
+
+    const elementoAtivo =
+    document.getElementById(
+        "ativoNome"
+    );
+
+
+    if(elementoAtivo){
+
+
+        elementoAtivo.innerHTML =
+        ativoAtual;
+
+
+    }
+
+
+}
+
+
+
+// =================================================
+// FIM DA PARTE 2
+// =================================================
