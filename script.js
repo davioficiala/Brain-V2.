@@ -1363,7 +1363,230 @@ desenharCandles=function(){
 
 
 
+// =================================================
+// PARTE 6
+// =================================================
 
+
+// =================================================
+// CALCULAR BANDAS DE BOLLINGER
+// =================================================
+
+function calcularBollinger(periodo = 20){
+
+    if(BrainTrader.candles.length < periodo){
+
+        return null;
+
+    }
+
+    const precos = [];
+
+    for(let i=0;i<periodo;i++){
+
+        precos.push(
+
+            Number(
+
+                BrainTrader.candles[i].close
+
+            )
+
+        );
+
+    }
+
+    const media =
+
+    precos.reduce(
+
+        (a,b)=>a+b,
+
+        0
+
+    ) / periodo;
+
+
+    let soma = 0;
+
+    precos.forEach(
+
+        valor=>{
+
+            soma += Math.pow(
+
+                valor-media,
+
+                2
+
+            );
+
+        }
+
+    );
+
+    const desvio =
+
+    Math.sqrt(
+
+        soma / periodo
+
+    );
+
+
+    return{
+
+        superior:
+
+        media+(desvio*2),
+
+        media,
+
+        inferior:
+
+        media-(desvio*2)
+
+    };
+
+}
+
+
+// =================================================
+// ATUALIZAR BOLLINGER
+// =================================================
+
+function atualizarBollinger(){
+
+    const bb =
+
+    calcularBollinger();
+
+    if(!bb){
+
+        return;
+
+    }
+
+    const valor =
+
+    document.getElementById(
+
+        "ind-bb"
+
+    );
+
+    if(valor){
+
+        valor.innerHTML =
+
+        bb.media.toFixed(2);
+
+    }
+
+    const status =
+
+    document.getElementById(
+
+        "bb-status"
+
+    );
+
+    if(status){
+
+        status.innerHTML =
+
+        "Bandas Ativas";
+
+    }
+
+}
+
+
+// =================================================
+// ATR (PROVISÓRIO)
+// =================================================
+
+function atualizarATR(){
+
+    if(!atrValor){
+
+        return;
+
+    }
+
+    atrValor.innerHTML =
+
+    "--";
+
+}
+
+
+// =================================================
+// ADX (PROVISÓRIO)
+// =================================================
+
+function atualizarADX(){
+
+    if(!adxValor){
+
+        return;
+
+    }
+
+    adxValor.innerHTML =
+
+    "--";
+
+}
+
+
+// =================================================
+// VWAP (PROVISÓRIO)
+// =================================================
+
+function atualizarVWAP(){
+
+    if(!vwapValor){
+
+        return;
+
+    }
+
+    vwapValor.innerHTML =
+
+    "--";
+
+}
+
+
+// =================================================
+// ATUALIZAR TODOS
+// =================================================
+
+const atualizarIndicadoresOriginal =
+
+atualizarIndicadores;
+
+atualizarIndicadores = function(){
+
+    atualizarIndicadoresOriginal();
+
+    atualizarMACD();
+
+    atualizarBollinger();
+
+    atualizarATR();
+
+    atualizarADX();
+
+    atualizarVWAP();
+
+};
+
+
+// =================================================
+// FIM PARTE 6
+// =================================================
 
 
 
