@@ -1,38 +1,28 @@
-alert("API.JS CARREGOU");
-
-
 
 // =================================================
-// BRAIN WALKER IA
-// API DE MERCADO REAL
-// PARTE 1
+// TESTE TWELVE DATA
 // =================================================
 
+const API_KEY = "SUA_CHAVE_AQUI";
 
-// =================================================
-// CONFIGURAÇÃO DA API
-// =================================================
+const url = `https://api.twelvedata.com/time_series?symbol=PETR4&interval=1min&apikey=${API_KEY}`;
 
-// COLOQUE SUA CHAVE DA API AQUI
-const API_KEY = "f2c71f3ac827461787c0cf240d6b9314";
+fetch(url)
+.then(res => res.json())
+.then(dados => {
 
+    console.log(dados);
 
-// =================================================
-// CONFIGURAÇÃO DO ATIVO
-// =================================================
+    alert("Dados recebidos da API");
 
-let ativoAtual = "PETR4";
+})
+.catch(erro => {
 
-let intervalo = "1min";
+    console.log(erro);
 
+    alert("Erro na API");
 
-// =================================================
-// URL DA API
-// COLE A URL DO PROVEDOR DE DADOS AQUI
-// =================================================
-
-const API_URL = "https://api.twelvedata.com/time_series";
-
+});
 
 // =================================================
 // VARIÁVEIS DE DADOS
