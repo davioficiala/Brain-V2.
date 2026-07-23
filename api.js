@@ -524,3 +524,273 @@ function iniciarAPI(){
 // =================================================
 // FIM DA PARTE 4
 // =================================================
+
+// =================================================
+// BRAIN WALKER IA
+// VALIDAÇÃO DOS DADOS DA API
+// PARTE 5
+// =================================================
+
+
+// =================================================
+// FORMATAR PREÇO
+// =================================================
+
+function formatarPreco(valor){
+
+
+    if(!valor){
+
+        return "--";
+
+    }
+
+
+    return Number(valor)
+    .toLocaleString(
+        "pt-BR",
+        {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    );
+
+
+}
+
+
+
+// =================================================
+// FORMATAR CANDLE
+// =================================================
+
+function organizarCandle(candle){
+
+
+    return {
+
+
+        abertura:
+        Number(candle.open),
+
+
+        maxima:
+        Number(candle.high),
+
+
+        minima:
+        Number(candle.low),
+
+
+        fechamento:
+        Number(candle.close),
+
+
+        volume:
+        Number(candle.volume),
+
+
+        horario:
+        candle.datetime
+
+
+    };
+
+
+}
+
+
+
+
+// =================================================
+// ORGANIZAR TODOS OS CANDLES
+// =================================================
+
+function organizarCandles(lista){
+
+
+    if(!Array.isArray(lista)){
+
+
+        return [];
+
+
+    }
+
+
+
+    return lista.map(
+
+        candle => organizarCandle(candle)
+
+    );
+
+
+}
+
+
+
+// =================================================
+// PREPARAR DADOS PARA O GRÁFICO
+// =================================================
+
+function prepararGrafico(dados){
+
+
+    const candles =
+    organizarCandles(
+        dados
+    );
+
+
+    dadosCandles =
+    candles;
+
+
+    return candles;
+
+
+}
+
+
+
+// =================================================
+// FIM DA PARTE 5
+// =================================================
+
+
+// =================================================
+// BRAIN WALKER IA
+// CONTROLE DE ERROS E STATUS
+// PARTE 6
+// =================================================
+
+
+// =================================================
+// MOSTRAR ERRO DA API
+// =================================================
+
+function mostrarErroAPI(mensagem){
+
+
+    console.log(
+        "API ERRO:",
+        mensagem
+    );
+
+
+    const status =
+    document.getElementById(
+        "mercadoStatus"
+    );
+
+
+    if(status){
+
+
+        status.innerHTML =
+        mensagem;
+
+
+    }
+
+
+}
+
+
+
+// =================================================
+// MOSTRAR MERCADO ONLINE
+// =================================================
+
+function mercadoOnline(){
+
+
+    const status =
+    document.getElementById(
+        "mercadoStatus"
+    );
+
+
+    if(status){
+
+
+        status.innerHTML =
+        "Mercado conectado em tempo real";
+
+
+    }
+
+
+}
+
+
+
+// =================================================
+// TESTAR CONEXÃO API
+// =================================================
+
+async function testarAPI(){
+
+
+    try{
+
+
+        const dados =
+        await buscarMercadoReal();
+
+
+
+        if(dados){
+
+
+            mercadoOnline();
+
+
+
+            console.log(
+                "API funcionando",
+                dados
+            );
+
+
+        }
+
+
+
+    }
+    catch(error){
+
+
+        mostrarErroAPI(
+            "Falha na conexão"
+        );
+
+
+    }
+
+
+}
+
+
+
+// =================================================
+// INICIALIZAÇÃO AUTOMÁTICA
+// =================================================
+
+window.addEventListener(
+    "load",
+    ()=>{
+
+
+        iniciarAPI();
+
+
+    }
+);
+
+
+
+// =================================================
+// FIM DA PARTE 6
+// =================================================
