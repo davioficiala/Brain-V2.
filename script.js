@@ -758,5 +758,318 @@ atualizarSistema();
 // =================================================
 
 
+// =================================================
+// PARTE 4
+// =================================================
+
+
+// =================================================
+// CALCULAR RSI
+// =================================================
+
+function calcularRSI(
+
+    periodo=14
+
+){
+
+    if(
+
+        BrainTrader.candles.length<=periodo
+
+    ){
+
+        return 50;
+
+    }
+
+
+    let ganhos=0;
+
+    let perdas=0;
+
+
+    for(
+
+        let i=1;
+
+        i<=periodo;
+
+        i++
+
+    ){
+
+        const atual=
+
+        Number(
+
+            BrainTrader.candles[i-1].close
+
+        );
+
+        const anterior=
+
+        Number(
+
+            BrainTrader.candles[i].close
+
+        );
+
+
+        const diferenca=
+
+        atual-
+
+        anterior;
+
+
+        if(
+
+            diferenca>=0
+
+        ){
+
+            ganhos+=
+
+            diferenca;
+
+        }
+
+        else{
+
+            perdas+=
+
+            Math.abs(
+
+                diferenca
+
+            );
+
+        }
+
+    }
+
+
+    if(
+
+        perdas===0
+
+    ){
+
+        return 100;
+
+    }
+
+
+    const rs=
+
+    ganhos/
+
+    perdas;
+
+
+    return
+
+    100-
+
+    (
+
+        100/
+
+        (
+
+            1+
+
+            rs
+
+        )
+
+    );
+
+}
+
+
+// =================================================
+// ATUALIZAR RSI
+// =================================================
+
+function atualizarRSI(){
+
+    const rsi=
+
+    calcularRSI();
+
+
+    if(
+
+        rsiValor
+
+    ){
+
+        rsiValor.innerHTML=
+
+        rsi.toFixed(2);
+
+    }
+
+
+    const valor=
+
+    document.getElementById(
+
+        "ind-rsi"
+
+    );
+
+    if(valor){
+
+        valor.innerHTML=
+
+        rsi.toFixed(2);
+
+    }
+
+
+    const status=
+
+    document.getElementById(
+
+        "rsi-status"
+
+    );
+
+    if(status){
+
+        if(rsi>=70){
+
+            status.innerHTML=
+
+            "Sobrecomprado";
+
+        }
+
+        else if(rsi<=30){
+
+            status.innerHTML=
+
+            "Sobrevendido";
+
+        }
+
+        else{
+
+            status.innerHTML=
+
+            "Neutro";
+
+        }
+
+    }
+
+}
+
+
+// =================================================
+// ATUALIZAR VOLUME
+// =================================================
+
+function atualizarVolume(){
+
+    if(
+
+        BrainTrader.candles.length===0
+
+    ){
+
+        return;
+
+    }
+
+
+    const volume=
+
+    Number(
+
+        BrainTrader.candles[0].volume||0
+
+    );
+
+
+    if(
+
+        volumeValor
+
+    ){
+
+        volumeValor.innerHTML=
+
+        volume.toLocaleString(
+
+            "pt-BR"
+
+        );
+
+    }
+
+
+    const card=
+
+    document.getElementById(
+
+        "ind-volume"
+
+    );
+
+    if(card){
+
+        card.innerHTML=
+
+        volume.toLocaleString(
+
+            "pt-BR"
+
+        );
+
+    }
+
+}
+
+
+// =================================================
+// ATUALIZAR TODOS INDICADORES
+// =================================================
+
+function atualizarIndicadores(){
+
+    atualizarRSI();
+
+    atualizarVolume();
+
+}
+
+
+// =================================================
+// LIGAR INDICADORES AO SISTEMA
+// =================================================
+
+const atualizarSistemaOriginal=
+
+atualizarSistema;
+
+
+atualizarSistema=function(){
+
+    atualizarSistemaOriginal();
+
+    atualizarIndicadores();
+
+};
+
+
+// =================================================
+// FIM PARTE 4
+// =================================================
+
+
 
 
