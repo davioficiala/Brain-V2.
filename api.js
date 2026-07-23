@@ -1,15 +1,40 @@
-
 // =================================================
 // BRAIN WALKER IA
 // API MERCADO REAL - PETR4
 // =================================================
 
+
+// -----------------------------------------------
+// COLOCAR SUA CHAVE DA API AQUI
+// -----------------------------------------------
+
 const API_KEY = "f2c71f3ac827461787c0cf240d6b9314";
 
+
+// -----------------------------------------------
+// ESCOLHER O ATIVO
+// EXEMPLO: PETR4, VALE3, ITUB4
+// -----------------------------------------------
+
 const ATIVO = "PETR4";
+
+
+// -----------------------------------------------
+// TEMPO DO CANDLE
+// EXEMPLO: 1min, 5min, 15min
+// -----------------------------------------------
+
 const INTERVALO = "1min";
 
+
+// -----------------------------------------------
+// LINK DA API
+// NÃO ALTERAR
+// -----------------------------------------------
+
 const API_URL = "https://api.twelvedata.com/time_series";
+
+
 
 
 // =================================================
@@ -18,28 +43,48 @@ const API_URL = "https://api.twelvedata.com/time_series";
 
 async function buscarCandles(){
 
+
     try {
+
+
+        // -----------------------------------------------
+        // MONTAGEM DO LINK DA API
+        // -----------------------------------------------
 
         const url = `${API_URL}?symbol=${ATIVO}&interval=${INTERVALO}&apikey=${API_KEY}`;
 
+
+
         const resposta = await fetch(url);
 
+
         const dados = await resposta.json();
+
 
 
         console.log("Candles recebidos:", dados);
 
 
+
         if(dados.values){
 
+
+
             const ultimo = dados.values[0];
+
 
 
             // =================================================
             // ATUALIZAR PREÇO NO HTML
             // =================================================
 
+
+            // -----------------------------------------------
+            // ID DO CAMPO DO PREÇO NO HTML
+            // -----------------------------------------------
+
             const preco = document.getElementById("precoAtual");
+
 
             if(preco){
 
@@ -48,7 +93,14 @@ async function buscarCandles(){
             }
 
 
+
+
+            // -----------------------------------------------
+            // ID DO NOME DO ATIVO NO HTML
+            // -----------------------------------------------
+
             const nome = document.getElementById("ativoNome");
+
 
             if(nome){
 
@@ -56,14 +108,19 @@ async function buscarCandles(){
 
             }
 
+
         }
+
 
 
     } catch(erro){
 
+
         console.log("Erro API:", erro);
 
+
     }
+
 
 }
 
@@ -72,11 +129,21 @@ async function buscarCandles(){
 // INICIAR API
 // =================================================
 
+
+// -----------------------------------------------
+// INICIA BUSCA AUTOMÁTICA
+// -----------------------------------------------
+
 buscarCandles();
 
 
-// Atualização a cada 1 minuto
+
+// -----------------------------------------------
+// ATUALIZA A CADA 1 MINUTO
+// -----------------------------------------------
+
 setInterval(buscarCandles,60000);
+
 
 
 
@@ -87,9 +154,25 @@ setInterval(buscarCandles,60000);
 // VARIÁVEIS DE DADOS
 // =================================================
 
+
+// -----------------------------------------------
+// GUARDA OS CANDLES RECEBIDOS
+// -----------------------------------------------
+
 let dadosCandles = [];
 
+
+
+// -----------------------------------------------
+// GUARDA O PREÇO ATUAL
+// -----------------------------------------------
+
 let precoMercado = 0;
+
+
+
+
+
 
 
 // =================================================
@@ -98,32 +181,51 @@ let precoMercado = 0;
 
 async function buscarMercadoReal(){
 
+
     try {
 
+
+
+        // -----------------------------------------------
+        // USA O MESMO ATIVO E INTERVALO DA CONFIGURAÇÃO
+        // -----------------------------------------------
+
         const resposta = await fetch(
-            `${API_URL}?symbol=${ativoAtual}&interval=${intervalo}&apikey=${API_KEY}`
+            `${API_URL}?symbol=${ATIVO}&interval=${INTERVALO}&apikey=${API_KEY}`
         );
+
 
 
         const dados = await resposta.json();
 
 
+
         console.log("Dados recebidos:", dados);
+
 
 
         return dados;
 
 
+
     } catch(error){
+
 
         console.log(
             "Erro ao buscar mercado:",
             error
         );
 
+
     }
 
+
 }
+
+
+
+
+
 
 
 // =================================================
