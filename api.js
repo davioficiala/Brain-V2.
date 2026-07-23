@@ -27,7 +27,7 @@ let intervalo = "1min";
 // COLE A URL DO PROVEDOR DE DADOS AQUI
 // =================================================
 
-const API_URL = "COLE_AQUI_URL_DA_API";
+const API_URL = "https://api.twelvedata.com/time_series";
 
 
 // =================================================
