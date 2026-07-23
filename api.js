@@ -1,28 +1,74 @@
 
+
 // =================================================
-// TESTE TWELVE DATA
+// BRAIN WALKER IA
+// API MERCADO REAL - PETR4
 // =================================================
 
 const API_KEY = "f2c71f3ac827461787c0cf240d6b9314";
 
-const url = `https://api.twelvedata.com/time_series?symbol=PETR4&interval=1min&apikey=${API_KEY}`;
+const ATIVO = "PETR4";
+const INTERVALO = "1min";
 
-fetch(url)
-.then(res => res.json())
-.then(dados => {
+const API_URL = "https://api.twelvedata.com/time_series";
 
-    console.log(dados);
 
-    alert("Dados recebidos da API");
+async function buscarCandles(){
 
-})
-.catch(erro => {
+    try {
 
-    console.log(erro);
+        const url = `${API_URL}?symbol=${ATIVO}&interval=${INTERVALO}&apikey=${API_KEY}`;
 
-    alert("Erro na API");
+        const resposta = await fetch(url);
 
-});
+        const dados = await resposta.json();
+
+
+        console.log("Candles recebidos:", dados);
+
+
+        if(dados.values){
+
+            const ultimo = dados.values[0];
+
+
+            // Atualiza preço no HTML
+            const preco = document.getElementById("precoAtual");
+
+            if(preco){
+
+                preco.innerHTML = "R$ " + ultimo.close;
+
+            }
+
+
+            const nome = document.getElementById("ativoNome");
+
+            if(nome){
+
+                nome.innerHTML = "Petrobras (PETR4)";
+
+            }
+
+
+        }
+
+
+    } catch(erro){
+
+        console.log("Erro API:", erro);
+
+    }
+
+}
+
+
+// chama a API
+buscarCandles();
+
+
+// atualiza a cada 1 minuto
+setInterval(buscarCandles,60000);
 
 // =================================================
 // VARIÁVEIS DE DADOS
