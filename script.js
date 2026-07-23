@@ -467,7 +467,191 @@ function desenharCandles(){
 // =================================================
 
 
+// =================================================
+// BRAIN WALKER IA V2
+// SCRIPT PRINCIPAL
+// PARTE 3
+// =================================================
 
+
+// =================================================
+// INÍCIO - ATUALIZAR PREÇO ATUAL
+// =================================================
+
+function atualizarPrecoAtual(){
+
+    if(BrainTrader.candles.length===0){
+
+        return;
+
+    }
+
+    const ultimo=BrainTrader.candles[0];
+
+    if(precoAtual){
+
+        precoAtual.innerHTML=
+
+        "R$ "+Number(ultimo.close).toFixed(2);
+
+    }
+
+    if(ativoNome){
+
+        ativoNome.innerHTML=
+
+        "PETROBRAS (PETR4)";
+
+    }
+
+}
+
+// =================================================
+// FIM - ATUALIZAR PREÇO ATUAL
+// =================================================
+
+
+
+// =================================================
+// INÍCIO - STATUS DO MERCADO
+// =================================================
+
+function atualizarStatus(){
+
+    if(!mercadoStatus){
+
+        return;
+
+    }
+
+    mercadoStatus.innerHTML=
+
+    BrainTrader.online
+
+    ?
+
+    "🟢 Mercado Online"
+
+    :
+
+    "🔴 Mercado Offline";
+
+}
+
+// =================================================
+// FIM - STATUS DO MERCADO
+// =================================================
+
+
+
+// =================================================
+// INÍCIO - STATUS BRAIN IA
+// =================================================
+
+function atualizarBrain(){
+
+    if(!brainMensagem){
+
+        return;
+
+    }
+
+    if(BrainTrader.candles.length===0){
+
+        brainMensagem.innerHTML=
+
+        "Aguardando candles...";
+
+        return;
+
+    }
+
+    const ultimo=
+
+    Number(
+
+        BrainTrader.candles[0].close
+
+    );
+
+    const anterior=
+
+    Number(
+
+        BrainTrader.candles[1].close
+
+    );
+
+
+    if(ultimo>anterior){
+
+        brainMensagem.innerHTML=
+
+        "📈 Tendência de Alta";
+
+    }else if(ultimo<anterior){
+
+        brainMensagem.innerHTML=
+
+        "📉 Tendência de Baixa";
+
+    }else{
+
+        brainMensagem.innerHTML=
+
+        "➡ Mercado Lateral";
+
+    }
+
+}
+
+// =================================================
+// FIM - STATUS BRAIN IA
+// =================================================
+
+
+
+// =================================================
+// INÍCIO - LOOP PRINCIPAL
+// =================================================
+
+function atualizarSistema(){
+
+    atualizarDadosMercado();
+
+    atualizarPrecoAtual();
+
+    atualizarStatus();
+
+    atualizarBrain();
+
+    desenharCandles();
+
+}
+
+// =================================================
+// FIM - LOOP PRINCIPAL
+// =================================================
+
+
+
+// =================================================
+// INÍCIO - EXECUÇÃO CONTÍNUA
+// =================================================
+
+setInterval(
+
+    atualizarSistema,
+
+    1000
+
+);
+
+atualizarSistema();
+
+// =================================================
+// FIM - EXECUÇÃO CONTÍNUA
+// =================================================
 
 
 
