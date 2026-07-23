@@ -4,7 +4,7 @@
 // API MERCADO REAL - PETR4
 // =================================================
 
-const API_KEY = "SUA_CHAVE_AQUI";
+const API_KEY = "f2c71f3ac827461787c0cf240d6b9314";
 
 const ATIVO = "PETR4";
 const INTERVALO = "1min";
