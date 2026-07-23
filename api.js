@@ -214,3 +214,313 @@ function atualizarNomeAtivo(){
 // =================================================
 // FIM DA PARTE 2
 // =================================================
+
+// =================================================
+// BRAIN WALKER IA
+// ATUALIZAÇÃO AUTOMÁTICA DO MERCADO
+// PARTE 3
+// =================================================
+
+
+// =================================================
+// INICIAR BUSCA DE DADOS
+// =================================================
+
+async function iniciarMercado(){
+
+
+    const dados =
+    await buscarMercadoReal();
+
+
+    const mercado =
+    processarDadosMercado(
+        dados
+    );
+
+
+    if(mercado){
+
+
+        atualizarPrecoTela();
+
+
+        atualizarNomeAtivo();
+
+
+        // Envia candles para o gráfico
+        if(
+            typeof atualizarGrafico === "function"
+        ){
+
+            atualizarGrafico(
+                mercado.candles
+            );
+
+        }
+
+
+        // Envia dados para Brain IA
+        if(
+            typeof analisarMercado === "function"
+        ){
+
+            analisarMercado(
+                mercado
+            );
+
+        }
+
+
+    }
+
+
+}
+
+
+
+// =================================================
+// ATUALIZAÇÃO EM TEMPO REAL
+// =================================================
+
+// Atualiza a cada 5 segundos
+
+setInterval(
+
+    iniciarMercado,
+
+    5000
+
+);
+
+
+
+
+// =================================================
+// TROCAR ATIVO
+// =================================================
+
+function trocarAtivo(novoAtivo){
+
+
+    ativoAtual =
+    novoAtivo;
+
+
+    atualizarNomeAtivo();
+
+
+    iniciarMercado();
+
+
+}
+
+
+
+// =================================================
+// BOTÃO PESQUISAR ATIVO
+// =================================================
+
+const botaoBuscar =
+document.getElementById(
+    "btnBuscar"
+);
+
+
+
+if(botaoBuscar){
+
+
+    botaoBuscar.onclick = function(){
+
+
+        const campo =
+        document.getElementById(
+            "buscarAtivo"
+        );
+
+
+        if(campo.value){
+
+
+            trocarAtivo(
+                campo.value.toUpperCase()
+            );
+
+
+        }
+
+
+    };
+
+
+}
+
+
+
+// =================================================
+// FIM DA PARTE 3
+// =================================================
+
+// =================================================
+// BRAIN WALKER IA
+// PREPARAÇÃO PARA WEBSOCKET / TEMPO REAL
+// PARTE 4
+// =================================================
+
+
+// =================================================
+// CONEXÃO EM TEMPO REAL
+// =================================================
+
+// Quando a corretora/provedor liberar WebSocket,
+// esta função receberá os preços instantâneos.
+
+
+let conexaoTempoReal = null;
+
+
+
+function conectarTempoReal(){
+
+
+    /*
+    
+    COLOQUE AQUI O LINK WEBSOCKET
+    DA CORRETORA OU PROVEDOR
+
+
+    Exemplo:
+
+    conexaoTempoReal =
+    new WebSocket(
+        "URL_WEBSOCKET_AQUI"
+    );
+
+
+    */
+
+
+    console.log(
+        "Aguardando conexão WebSocket real..."
+    );
+
+
+}
+
+
+
+// =================================================
+// RECEBER PREÇO EM TEMPO REAL
+// =================================================
+
+function receberTempoReal(dado){
+
+
+    if(!dado){
+
+        return;
+
+    }
+
+
+
+    if(dado.preco){
+
+
+        precoMercado =
+        Number(
+            dado.preco
+        );
+
+
+        atualizarPrecoTela();
+
+
+    }
+
+
+
+}
+
+
+
+// =================================================
+// ATUALIZAR VARIAÇÃO
+// =================================================
+
+function atualizarVariacao(valor){
+
+
+    const campo =
+    document.getElementById(
+        "variacao"
+    );
+
+
+    if(campo){
+
+
+        campo.innerHTML =
+        valor + "%";
+
+
+    }
+
+
+}
+
+
+
+// =================================================
+// STATUS DA API
+// =================================================
+
+function atualizarStatusAPI(status){
+
+
+    const mensagem =
+    document.querySelector(
+        ".status-api"
+    );
+
+
+    if(mensagem){
+
+
+        mensagem.innerHTML =
+        status;
+
+
+    }
+
+
+}
+
+
+
+// =================================================
+// INICIAR API
+// =================================================
+
+function iniciarAPI(){
+
+
+    atualizarNomeAtivo();
+
+
+    iniciarMercado();
+
+
+    // Futuramente:
+    // conectarTempoReal();
+
+
+
+}
+
+
+
+// =================================================
+// FIM DA PARTE 4
+// =================================================
