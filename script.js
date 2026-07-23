@@ -1588,7 +1588,247 @@ atualizarIndicadores = function(){
 // FIM PARTE 6
 // =================================================
 
+// =================================================
+// PARTE 7
+// =================================================
 
+
+// =================================================
+// CALCULAR SINAL DA IA
+// =================================================
+
+function analisarBrainIA(){
+
+    if(
+
+        BrainTrader.candles.length < 30
+
+    ){
+
+        return;
+
+    }
+
+
+    const ultimo =
+
+    Number(
+
+        BrainTrader.candles[0].close
+
+    );
+
+
+    const ma9 =
+
+    calcularMediaMovel(9)[0];
+
+
+    const ma21 =
+
+    calcularMediaMovel(21)[0];
+
+
+    const rsi =
+
+    calcularRSI();
+
+
+    let score = 0;
+
+
+    if(
+
+        ultimo > ma9
+
+    ){
+
+        score += 20;
+
+    }
+
+    else{
+
+        score -= 20;
+
+    }
+
+
+    if(
+
+        ma9 > ma21
+
+    ){
+
+        score += 20;
+
+    }
+
+    else{
+
+        score -= 20;
+
+    }
+
+
+    if(
+
+        rsi > 55 &&
+
+        rsi < 70
+
+    ){
+
+        score += 20;
+
+    }
+
+
+    if(
+
+        rsi < 45 &&
+
+        rsi > 30
+
+    ){
+
+        score -= 20;
+
+    }
+
+
+    let sinal =
+
+    "AGUARDAR";
+
+
+    if(
+
+        score >= 40
+
+    ){
+
+        sinal =
+
+        "COMPRA";
+
+    }
+
+
+    if(
+
+        score <= -40
+
+    ){
+
+        sinal =
+
+        "VENDA";
+
+    }
+
+
+    BrainTrader.estrategia = {
+
+        score,
+
+        sinal,
+
+        preco: ultimo,
+
+        horario: new Date()
+
+    };
+
+}
+
+
+// =================================================
+// ATUALIZAR PAINEL IA
+// =================================================
+
+function atualizarPainelIA(){
+
+    if(
+
+        !BrainTrader.estrategia.sinal
+
+    ){
+
+        return;
+
+    }
+
+
+    const painel =
+
+    document.getElementById(
+
+        "sinalIA"
+
+    );
+
+
+    if(
+
+        painel
+
+    ){
+
+        painel.innerHTML =
+
+        BrainTrader.estrategia.sinal;
+
+    }
+
+
+    const forca =
+
+    document.getElementById(
+
+        "forcaIA"
+
+    );
+
+
+    if(
+
+        forca
+
+    ){
+
+        forca.innerHTML =
+
+        BrainTrader.estrategia.score;
+
+    }
+
+}
+
+
+// =================================================
+// EXECUTAR IA
+// =================================================
+
+const atualizarSistemaIA =
+
+atualizarSistema;
+
+
+atualizarSistema = function(){
+
+    atualizarSistemaIA();
+
+    analisarBrainIA();
+
+    atualizarPainelIA();
+
+};
+
+
+// =================================================
+// FIM PARTE 7
+// =================================================
 
 
 
