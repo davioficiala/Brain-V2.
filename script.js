@@ -228,3 +228,323 @@ console.log(
 // FIM PARTE 1
 // =================================================
     
+// =================================================
+// PARTE 2
+// =================================================
+
+
+// =================================================
+// RECEBER DADOS DA API
+// =================================================
+
+function atualizarCandles(){
+
+    if(!window.candlesReais){
+
+        return;
+
+    }
+
+    BrainTrader.candles =
+
+    window.candlesReais;
+
+    BrainTrader.online = true;
+
+}
+
+
+// =================================================
+// CALCULAR MAIOR E MENOR PREÇO
+// =================================================
+
+function calcularEscala(){
+
+    if(
+
+        BrainTrader.candles.length===0
+
+    ){
+
+        return null;
+
+    }
+
+
+    const maior = Math.max(
+
+        ...BrainTrader.candles.map(
+
+            candle => Number(
+
+                candle.high
+
+            )
+
+        )
+
+    );
+
+
+    const menor = Math.min(
+
+        ...BrainTrader.candles.map(
+
+            candle => Number(
+
+                candle.low
+
+            )
+
+        )
+
+    );
+
+
+    return{
+
+        maior,
+
+        menor
+
+    };
+
+}
+
+
+// =================================================
+// CONVERTER PREÇO EM PIXEL
+// =================================================
+
+function precoParaY(
+
+    preco,
+
+    escala
+
+){
+
+    return
+
+    canvas.height-
+
+    (
+
+        (
+
+            preco-
+
+            escala.menor
+
+        )
+
+        /
+
+        (
+
+            escala.maior-
+
+            escala.menor
+
+        )
+
+    )
+
+    *
+
+    canvas.height;
+
+}
+
+
+// =================================================
+// DESENHAR CANDLES
+// =================================================
+
+function desenharCandles(){
+
+    if(
+
+        BrainTrader.candles.length===0
+
+    ){
+
+        return;
+
+    }
+
+
+    desenharFundo();
+
+    desenharGrade();
+
+
+    const escala=
+
+    calcularEscala();
+
+
+    const candles=
+
+    [...BrainTrader.candles]
+
+    .reverse();
+
+
+    const largura=
+
+    canvas.width/
+
+    candles.length;
+
+
+    candles.forEach(
+
+        (
+
+            candle,
+
+            indice
+
+        )=>{
+
+            const open=
+
+            Number(candle.open);
+
+            const high=
+
+            Number(candle.high);
+
+            const low=
+
+            Number(candle.low);
+
+            const close=
+
+            Number(candle.close);
+
+
+            const x=
+
+            indice*
+
+            largura+
+
+            largura/2;
+
+
+            const yOpen=
+
+            precoParaY(
+
+                open,
+
+                escala
+
+            );
+
+            const yClose=
+
+            precoParaY(
+
+                close,
+
+                escala
+
+            );
+
+            const yHigh=
+
+            precoParaY(
+
+                high,
+
+                escala
+
+            );
+
+            const yLow=
+
+            precoParaY(
+
+                low,
+
+                escala
+
+            );
+
+
+            ctx.strokeStyle="#ffffff";
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+
+                x,
+
+                yHigh
+
+            );
+
+            ctx.lineTo(
+
+                x,
+
+                yLow
+
+            );
+
+            ctx.stroke();
+
+
+            ctx.fillStyle=
+
+            close>=open
+
+            ?
+
+            "#00ff66"
+
+            :
+
+            "#ff3333";
+
+
+            ctx.fillRect(
+
+                x-4,
+
+                Math.min(
+
+                    yOpen,
+
+                    yClose
+
+                ),
+
+                8,
+
+                Math.abs(
+
+                    yClose-
+
+                    yOpen
+
+                )||1
+
+            );
+
+        }
+
+    );
+
+}
+
+// =================================================
+// FIM PARTE 2
+// =================================================
+
+
+
+
